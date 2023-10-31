@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>USER DATA FORM</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+      margin: 0;
+      padding: 0;
+    }
+
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+
+    #user-info-form {
+      max-width: 600px;
+      margin: 20px auto;
+      background: #fff;
+      padding: 20px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      border-radius: 5px;
+    }
+
+    label {
+      font-weight: bold;
+    }
+
+    input[type="text"],
+    textarea {
+      width: 100%;
+      padding: 10px;
+      margin: 5px 0;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+    }
+
+    textarea {
+      resize: vertical;
+    }
+
+    input[type="file"] {
+      display: none;
+    }
+
+    button {
+      display: inline-block;
+      padding: 10px 20px;
+      margin: 10px 0;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+    }
+
+    #cv-upload,
+    #picture-upload {
+      display: none;
+    }
+
+    #upload-cv-button,
+    #upload-picture-button,
+    #submit-button {
+      background-color: #007BFF;
+      color: #fff;
+      transition: background-color 0.3s;
+    }
+
+    #upload-cv-button:hover,
+    #upload-picture-button:hover,
+    #submit-button:hover {
+      background-color: #0056b3;
+    }
+
+    #cv-upload-label,
+    #picture-upload-label {
+      cursor: pointer;
+      text-decoration: underline;
+      color: #007BFF;
+    }
+
+    #cv-upload-label:hover,
+    #picture-upload-label:hover {
+      text-decoration: none;
+      color: #0056b3;
+    }
+
+    br {
+      clear: both;
+    }
+
+    .alert {
+      background-color: #4CAF50;
+      color: white;
+      text-align: center;
+      padding: 10px;
+      border-radius: 3px;
+    }
+  </style>
+</head>
+<body>
+  <a href="Chanda-Girish_hw3_secontPhase.html" >
+    <img src="home.png" alt="home" style="width:42px;height:42px;">
+  </a>
+  <h1>USER DATA FORM</h1>
+  <form id="user-info-form" action="process-form.php" method="post">
+    <label for="current-location">My Current Location:</label>
+    <input type="text" id="current-location" name="current-location" required><br><br>
+    
+    <label for="search-online">I am from:</label>
+    <input type="text" id="search-online" name="search-online"><br><br>
+
+    <label for="desired-location">I'd like to be in:</label>
+    <input type="text" id="desired-location" name="desired-location"><br><br>
+
+    <label for="family-background">My family is from:</label>
+    <input type="text" id="family-background" name="family-background"><br><br>
+
+    <label for="place-of-birth">My place of birth:</label>
+    <input type="text" id="place-of-birth" name="place-of-birth"><br><br>
+
+    <label for="current-residence">Where I live now:</label>
+    <input type="text" id="current-residence" name="current-residence"><br><br>
+
+    <label for="desired-residence">Where I'd like to live:</label>
+    <input type="text" id="desired-residence" name="desired-residence"><br><br>
+
+    <label for="significant-other">Where my "significant other" was born/grew up:</label>
+    <input type="text" id="significant-other" name="significant-other"><br><br>
+
+    <label for="other-info">Facts about me</label>
+    <textarea id="other-info" name="other-info"></textarea><br><br>
+
+    <input type="file" id="cv-upload" accept=".pdf, .doc, .docx" name="cv-upload">
+    <label for="cv-upload" id="cv-upload-label">Upload CV</label>
+    <div id="cv-file-name"></div><br><br>
+
+    <input type="file" id="picture-upload" accept="image/*" name="picture-upload">
+    <label for="picture-upload" id="picture-upload-label">Upload Picture</label>
+    <div id="picture-file-name"></div><br><br>
+
+    <button type="submit" id="submit-button">Submit</button>
+  </form>
+</body>
+</html>
