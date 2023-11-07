@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SignUp Form</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+        }
+
+        h2 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-top: 10px;
+            color: #666;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="url"],
+        input[type="password"] {
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        .formError {
+            color: #d32f2f;
+            font-size: 0.8rem;
+            height: 1rem;
+            display: block;
+        }
+
+        .formSuccess {
+            color: #388e3c;
+            font-size: 0.9rem;
+            margin-top: 15px;
+        }
+
+        #alertBox {
+            border-radius: 4px;
+            text-align: center;
+            margin-top: 20px;
+            padding: 15px;
+            display: none;
+        }
+
+        button {
+            background-color: #410007;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 1rem;
+        }
+
+        button:hover {
+            background-color: #110000;
+        }
+
+        button:active {
+            background-color: #220065;
+        }
+    </style>
+</head>
+<body>
+   <h2>SignUp Form</h2>
+    <form action="/signup" method="post">
+        <label for="fullName">Full Name:</label>
+        <input type="text" id="fullName" name="fullName" required>
+        <span class="formError" id="fullNameError"></span>
+        <br>
+
+        <label for="contactEmail">Email:</label>
+        <input type="email" id="contactEmail" name="contactEmail" required>
+        <span class="formError" id="contactEmailError"></span>
+        <br>
+
+        <label for="phoneNumber">Phone (US format):</label>
+        <input type="text" id="phoneNumber" name="phoneNumber" required>
+        <span class="formError" id="phoneNumberError"></span>
+        <br>
+
+        <label for="websiteURL">Website URL:</label>
+        <input type="url" id="websiteURL" name="websiteURL" required>
+        <span class="formError" id="websiteURLError"></span>
+        <br>
+
+        <label for="userPassword">Password:</label>
+        <input type="password" id="userPassword" name="userPassword" required>
+        <span class="formError" id="userPasswordError"></span>
+        <br>
+
+        <label for="verifyPassword">Verify Password:</label>
+        <input type="password" id="verifyPassword" name="verifyPassword" required>
+        <span class="formError" id="verifyPasswordError"></span>
+        <br>
+
+        <button type="submit">Register</button>
+    </form>
+
+    <div id="alertBox"></div>
+
+    <script>
+        // Script for form validation and user notification
+        document.querySelector('form').addEventListener('submit', async (event) => {
+            event.preventDefault();
+
+            const fullNameField = document.getElementById('fullName');
+            const contactEmailField = document.getElementById('contactEmail');
+            const phoneNumberField = document.getElementById('phoneNumber');
+            const websiteURLField = document.getElementById('websiteURL');
+            const userPasswordField = document.getElementById('userPassword');
+            const verifyPasswordField = document.getElementById('verifyPassword');
+
+            const fullNameErrorDisplay = document.getElementById('fullNameError');
+            const contactEmailErrorDisplay = document.getElementById('contactEmailError');
+            const phoneNumberErrorDisplay = document.getElementById('phoneNumberError');
+            const websiteURLErrorDisplay = document.getElementById('websiteURLError');
+            const userPasswordErrorDisplay = document.getElementById('userPasswordError');
+            const verifyPasswordErrorDisplay = document.getElementById('verifyPasswordError');
+
+            let formIsValid = true;
+            let formErrorMessages = [];
+
+            // Pattern checks
+            const fullNamePattern = /^[A-Za-z\s]+$/;
+             if (!fullNameField.value.match(fullNamePattern)) {
+                fullNameErrorDisplay.textContent = 'Full Name is not valid.';
+                formErrorMessages.push('Full Name is not valid.');
+                formIsValid = false;
+            } else {
+                fullNameErrorDisplay.textContent = '';
+            }
+
+            const emailPattern = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
+            if (!contactEmailField.value.match(emailPattern)) {
+                contactEmailErrorDisplay.textContent = 'Email format is incorrect.';
+                formErrorMessages.push('Email format is incorrect.');
+                formIsValid = false;
+            } else {
+                contactEmailErrorDisplay.textContent = '';
+            }
+
+            const phonePattern = /^(\d{3}-\d{3}-\d{4}|\(\d{3}\) \d{3}-\d{4}|\d{10}|\d{3} \d{3} \d{4})$/;
+            if (!phoneNumberField.value.match(phonePattern)) {
+                phoneNumberErrorDisplay.textContent = 'Phone number format is incorrect.';
+                formErrorMessages.push('Phone number format is incorrect.');
+                formIsValid = false;
+            } else {
+                phoneNumberErrorDisplay.textContent = '';
+            }
+
+            const urlPattern = /^(https?:\/\/)?[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}/;
+            if (!websiteURLField.value.match(urlPattern)) {
+                websiteURLErrorDisplay.textContent = 'URL format is incorrect.';
+                formErrorMessages.push('URL format is incorrect.');
+                formIsValid = false;
+            } else {
+                websiteURLErrorDisplay.textContent = '';
+            }
+
+            const passwordPattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
+            if (!userPasswordField.value.match(passwordPattern)) {
+                userPasswordErrorDisplay.textContent = 'Password requirements not met.';
+                formErrorMessages.push('Password requirements not met.');
+                formIsValid = false;
+            } else {
+                userPasswordErrorDisplay.textContent = '';
+            }
+
+            if (userPasswordField.value !== verifyPasswordField.value) {
+                verifyPasswordErrorDisplay.textContent = 'Passwords do not match.';
+                formErrorMessages.push('Passwords do not match.');
+                formIsValid = false;
+            } else {
+                verifyPasswordErrorDisplay.textContent = '';
+            }
+
+        
+            const alertBox = document.getElementById('alertBox');
+            if (!formIsValid) {
+                alertBox.style.display = 'block';
+                alertBox.innerHTML = `<div class="formError">Please fix the following:<ul>${formErrorMessages.map(msg => `<li>${msg}</li>`).join('')}</ul></div>`;
+            } else {
+                alertBox.style.display = 'block';
+                alertBox.innerHTML = '<div class="formSuccess">SignUp Complete!</div>';
+            }
+        });
+    </script>
+</body>
+</html>
